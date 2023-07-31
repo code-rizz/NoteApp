@@ -1,13 +1,13 @@
-#NoteApp - Coderizz
+# NoteApp - Coderizz
 
-#Prerequisites: 
+# Prerequisites: 
 
 1. Visual Studio with the Node.js development workload installed.
 2. The Node.js runtime installed
 
-#Goal: To create a note app with react and mongo db with authentication
+# Goal: To create a note app with react and mongo db with authentication
 
-#Features of Note App:
+# Features of Note App:
 
 1. Add and delete category
 2. Add and delete notes under each category
