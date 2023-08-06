@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const todoRoutes = require("./routes/routes");
+const Routes = require("./routes/routes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/", todoRoutes);
+app.use("/", Routes);
 try {
   mongoose.connect("mongodb://127.0.0.1:27017/noteapp");
 } catch (error) {

@@ -1,34 +1,71 @@
-const todoModel = require("../models/models");
+const { todoModel, categoryModel } = require("../models/models");
 
 const todoController = {
   getTodos: async (req, res) => {
-    const todos = await todoModel.getTodos();
-    console.log("controller:");
-    console.log(todos);
+    const username = req.params.username;
+    const category = req.params.category;
+    const todos = await todoModel.getTodos(category, username);
     res.json(todos);
   },
 
   addTodo: (req, res) => {
+    const username = req.params.username;
+    const category = req.params.category;
     const { todo } = req.body;
     if (!todo) {
       return res.status(400).json({ error: "Todo is required" });
     }
-    todoModel.addTodo(todo);
+    todoModel.addTodo(category, todo, username);
     res.status(201).json({ message: "Todo added successfully" });
   },
 
   deleteTodo: (req, res) => {
+    const username = req.params.username;
+    const category = req.params.category;
     const id = req.params.id;
-    todoModel.deleteTodo(id);
+    todoModel.deleteTodo(category, id, username);
     res.json({ message: "Todo deleted successfully" });
   },
 
   editTodo: (req, res) => {
+    const username = req.params.username;
+    const category = req.params.category;
     const id = req.params.id;
     const { todo } = req.body;
-    todoModel.editTodo(id, todo);
+    todoModel.editTodo(category, id, todo, username);
     res.json({ message: "Todo updated Successfully" });
   },
 };
 
-module.exports = todoController;
+const categoryController = {
+  getCategory: async (req, res) => {
+    const username = req.params.username;
+    const todos = await categoryModel.getcategory(username);
+    res.json(todos);
+  },
+
+  addCategory: (req, res) => {
+    const username = req.params.username;
+    const { todo } = req.body;
+    if (!todo) {
+      return res.status(400).json({ error: "Todo is required" });
+    }
+    categoryModel.addcategory(username, todo);
+    res.status(201).json({ message: "Todo added successfully" });
+  },
+
+  deleteCategory: (req, res) => {
+    const id = req.params.id;
+    categoryModel.deletecategory(id);
+    res.json({ message: "Todo deleted successfully" });
+  },
+
+  editCategory: (req, res) => {
+    const id = req.params.id;
+    const { todo } = req.body;
+    categoryModel.editcategory(id, todo);
+    res.json({ message: "Todo updated Successfully" });
+  },
+};
+
+module.exports = { todoController, categoryController };

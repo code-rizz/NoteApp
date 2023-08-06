@@ -1,11 +1,11 @@
-import React from 'react';
-import TodoTest from './components/TodoTest';
+import React from "react";
+import CategoryTest from "./components/CategoryTest";
 
 function App() {
   return (
     <div>
-     <TodoTest/>
-     </div>
+      <CategoryTest />
+    </div>
   );
 }
 
