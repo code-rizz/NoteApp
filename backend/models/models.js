@@ -11,27 +11,30 @@ const Item = new mongoose.model("Item", itemSchema);
 
 const todoModel = {
   getTodos: async () => {
-    const todos = await Item.find({}, { _id: 0, __v: 0 });
-    let arr = todos.map((todo) => todo.name);
-    console.log(arr);
-    return arr;
+    const todos = await Item.find({}, { __v: 0 });
+    return todos;
   },
   addTodo: (todo) => {
     const newItem = new Item({ name: todo });
     newItem.save();
   },
-  deleteTodo: (index) => {
-    if (index < 0 || index >= todos.length) {
-      throw new Error("Invalid index");
+  deleteTodo: async (id) => {
+    try {
+      await Item.findByIdAndDelete({ _id: id });
+    } catch (error) {
+      console.log(error);
     }
-    todos.splice(index, 1);
   },
-  editTodo: (index, newTodo) => {
-    if (index < 0 || index >= todos.length) {
-      throw new Error("Invalid index");
+  editTodo: async (id, newTodo) => {
+    try {
+      console.log(id, newTodo);
+      const update = await Item.updateOne(
+        { _id: id },
+        { $set: { name: newTodo } }
+      );
+    } catch (error) {
+      console.log(error);
     }
-    todos[index] = newTodo;
-    return todos[index];
   },
 };
 

@@ -32,9 +32,9 @@ function TodoTest() {
     }
   };
 
-  const handleDeleteTodo = async (index) => {
+  const handleDeleteTodo = async (id) => {
     try {
-      await deleteTodo(index);
+      await deleteTodo(id);
       fetchTodos();
     } catch (error) {
       console.error("Error deleting todo:", error);
@@ -56,9 +56,9 @@ function TodoTest() {
     <div>
       <h2>Todo List</h2>
       <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            {editIndex === index ? (
+        {todos.map((todo) => (
+          <li key={todo._id}>
+            {editIndex === todo._id ? (
               <>
                 <input
                   type="text"
@@ -69,12 +69,14 @@ function TodoTest() {
               </>
             ) : (
               <>
-                {todo}
-                <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+                {todo.name}
+                <button onClick={() => handleDeleteTodo(todo._id)}>
+                  Delete
+                </button>
                 <button
                   onClick={() => {
-                    setEditIndex(index);
-                    setEditedTodo(todo);
+                    setEditIndex(todo._id);
+                    setEditedTodo(todo.name);
                   }}
                 >
                   Edit

@@ -18,28 +18,15 @@ const todoController = {
   },
 
   deleteTodo: (req, res) => {
-    const index = parseInt(req.params.index);
-    if (isNaN(index) || index < 0 || index >= todoModel.getTodos().length) {
-      return res.status(400).json({ error: "Invalid index" });
-    }
-
-    todoModel.deleteTodo(index);
+    const id = req.params.id;
+    todoModel.deleteTodo(id);
     res.json({ message: "Todo deleted successfully" });
   },
 
   editTodo: (req, res) => {
-    const index = parseInt(req.params.index);
+    const id = req.params.id;
     const { todo } = req.body;
-    if (
-      isNaN(index) ||
-      index < 0 ||
-      index >= todoModel.getTodos().length ||
-      !todo
-    ) {
-      return res.status(400).json({ error: "Invalid index or todo data" });
-    }
-
-    todoModel.editTodo(index, todo);
+    todoModel.editTodo(id, todo);
     res.json({ message: "Todo updated Successfully" });
   },
 };
