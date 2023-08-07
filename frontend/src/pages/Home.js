@@ -1,7 +1,6 @@
 import React from 'react';
+
 import {
-    FooterHeadContainer,
-    FooterHeadText,
     Header,
     NoteTitle,
     CategoryList,
@@ -10,9 +9,23 @@ import {
     Bg,
     CategoryListContainer,
     NoteContainer,
-    GlobalStyle
+    ScrollBox,
+    GlobalStyle,
+
 } from '../styles';
 import backgroundImage from '../bg-image.jpg';
+
+// Your custom component to render the view
+const CustomView = ({ style, ...props }) => (
+        <div
+          style={{
+            ...style,
+            overflowX: 'hidden', // Optionally, you can hide the x-axis scrollbar in the view
+          }}
+          {...props}
+        />
+      );
+
 const Home = () => {
   return (
     <div>
@@ -23,6 +36,7 @@ const Home = () => {
 <CategoryListContainer>
 <Header>Note App</Header>
 
+<ScrollBox renderView={CustomView} >
         <CategoryList>
         <NoteTitle>1</NoteTitle>
         <Input
@@ -44,21 +58,56 @@ const Home = () => {
         </CategoryList>
 
         <CategoryList>
+        <NoteTitle>3</NoteTitle>
+        <Input
+                name="title"
+                type="text"
+                label="Title"
+                placeholder="Add Item"
+        />
+        </CategoryList>
+
+        <CategoryList>
+        <NoteTitle>4</NoteTitle>
+        <Input
+                name="title"
+                type="text"
+                label="Title"
+                placeholder="Add Item"
+        />
+        </CategoryList>
+
+        <CategoryList>
+        <NoteTitle>5</NoteTitle>
+        <Input
+                name="title"
+                type="text"
+                label="Title"
+                placeholder="Add Item"
+        />
+        </CategoryList>
+        <CategoryList>
+        <NoteTitle>6</NoteTitle>
+        <Input
+                name="title"
+                type="text"
+                label="Title"
+                placeholder="Add Item"
+        />
+        </CategoryList>
+</ScrollBox>
+        
+        <CategoryList>
         <Button> 
           + 
           {/* funtionality to be added */}
         </Button>
         </CategoryList>
 
-        </CategoryListContainer>
-        <FooterHeadContainer>
-            <FooterHeadText>
-                Note App - Made by Team Coderizz
-            </FooterHeadText>
-        </FooterHeadContainer>
-    </NoteContainer>
-    </Bg>
-    </div>
+</CategoryListContainer>
+</NoteContainer>
+</Bg>
+</div>
 
   );
 };

@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-
-export const GlobalStyle = createGlobalStyle`
-  body, html, div {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-`;
+import Scrollbars from 'react-custom-scrollbars';
 
 export const colors = {
     primary: "#000000",
@@ -17,13 +10,26 @@ export const colors = {
     white: "#fff"
 }
 
+
+export const GlobalStyle = createGlobalStyle`
+  body, html, div {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+`;
 export const Bg = styled.div`
 align-items: center;
 justify-content: center;
 background-image: url(${props => props.backgroundImage});
 background-size: cover;
 background-position: center;
-/* Add more background-related styles as needed */
+`;
+
+export const ScrollBox = styled(Scrollbars)`
+  background: ${colors.white};
+  max-height: 300px;
 `;
 
 export const NoteContainer = styled.div`
@@ -31,22 +37,7 @@ export const NoteContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
 
-export const FooterHeadContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-`;
-
-export const FooterHeadText = styled.p`
-  color: ${colors.primary};
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
 `;
 
 export const Header = styled.h1`
@@ -54,6 +45,7 @@ export const Header = styled.h1`
   text-align: center;
   text-transform: capitalize;
   margin-top: 5%;
+
 `;
 
 export const NoteTitle = styled.h2`
@@ -68,7 +60,6 @@ export const CategoryList = styled.li`
   padding: auto;
   justify-content:center;
   text-align: center;
-
 `;
 
 export const CategoryListContainer = styled.div`
@@ -82,12 +73,12 @@ export const CategoryListContainer = styled.div`
   width: 50%;
 `;
 
+
 export const NoteDescription = styled.p`
   font-size: 16px;
   margin: auto;
   color: ${colors.primary} ;
   text-align: center;
-  margin-bottom: 1%;
 `;
 
 export const Input = styled.input`
@@ -119,10 +110,8 @@ export const Button = styled.button`
   font-weight: 500;
   background:${colors.light};
   color: ${colors.primary};
-  margin-left:85%;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-right: 5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
 
   &:hover {
     color: ${colors.primary};

@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component here
 
 import {
-    FooterHeadContainer,
-    FooterHeadText,
     Header,
     NoteTitle,
     CategoryList,
@@ -74,11 +72,6 @@ const Login = () => {
 
       </CategoryListContainer>
       
-      <FooterHeadContainer>
-            <FooterHeadText>
-                Note App - Made by Team Coderizz
-            </FooterHeadText>
-        </FooterHeadContainer>
       </NoteContainer>
 
       </Bg>
