@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Continer from '../Components/Continer'
 import ListItem from '../Components/ListItem'
 import Model from '../Components/Model'
-import Notify from '../Components/Notify'
 import { useNavigate } from 'react-router'
+import Notify from '../Components/Notify'
 
 const HomePage = () => {
     const [openAddCategory, setOpenAddCategory] = useState(false);

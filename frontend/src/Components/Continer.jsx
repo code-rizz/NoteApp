@@ -3,7 +3,7 @@ import Button from './Button'
 
 const Continer = (props) => {
   return (
-    <div className={props.className+' h-5/6 w-1/2 rounded-xl min-h-fit min-w-fit shadow-2xl flex-row relative '}>
+    <div className={props.className+' w-full h-full sm:h-5/6 sm:w-1/2 rounded-xl min-h-fit min-w-fit shadow-2xl flex-row relative '}>
         <div className='h-1/6 m-3  flex'>
             <div className='m-auto font-extrabold font-["Poppins"] text-3xl'>{props.name}</div>
         </div>
