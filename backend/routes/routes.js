@@ -1,10 +1,16 @@
 const express = require("express");
+const { Signup, Login } = require("../Controllers/AuthController");
+const { userVerification } = require("../Middlewares/AuthMiddleware");
 const {
   todoController,
   categoryController,
 } = require("../controllers/controllers");
 
 const router = express.Router();
+
+router.post("/signup", Signup);
+router.post("/login", Login);
+router.post("/", userVerification);
 
 router.get("/:username/:category/todos", todoController.getTodos);
 router.post("/:username/:category/todos", todoController.addTodo);
