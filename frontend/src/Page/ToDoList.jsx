@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import Continer from "../Components/Continer";
 import CheckList from "../Components/CheckList";
 import { useParams } from "react-router";
+import Model from "../Components/Model";
 
 function ToDoList() {
   const [toDoList, setToDoList] = useState([]);
   const { list } = useParams();
+  const [openEditCategory, setOpenEditCategory] = useState(false);
+  const [openDeleteCategory, setOpenDeleteCategory] = useState(false);
+  const [addCategory, setAddCategory] = useState(list);
 
   return (
     <div className="w-screen h-screen flex">
       <Continer
-        name={list}
+        name={addCategory}
         className="m-auto select-none"
         onAdd={() => setToDoList([...toDoList, ""])}
-        onEdit={() => console.log("Added")}
-        onDelete={() => console.log("Added")}
+        onEdit={() => setOpenEditCategory(true)}
+        onDelete={() => setOpenDeleteCategory(true)}
       >
         {toDoList.map((item, index) => (
           <CheckList
@@ -36,6 +40,35 @@ function ToDoList() {
           />
         ))}
       </Continer>
+      <Model open={openEditCategory}>
+            <div>
+                Enter the name of Category
+            </div>
+            <div>
+                <input className='w-full border-b-2 focus:outline-none' type="text" value={addCategory} onChange={(e)=>setAddCategory(e.target.value)}/>
+            </div>
+            <div className='flex flex-row justify-around mt-3'>
+                <button className=' text-green-500' onClick={()=>{
+                    setOpenEditCategory(false);
+                }}>Add</button>
+                <button className=' text-red-500' onClick={()=>{
+                    setOpenEditCategory(false);
+                }}>Cancel</button>
+            </div>
+        </Model>
+        <Model open={openDeleteCategory}>
+            <div>
+                do you want to delete this Category?
+            </div>
+            <div className='flex flex-row justify-around mt-3'>
+                <button className=' text-green-500' onClick={()=>{
+                    setOpenDeleteCategory(false);
+                }}>Yes</button>
+                <button className=' text-red-500' onClick={()=>{
+                    setOpenDeleteCategory(false);
+                }}>NO</button>
+            </div>
+        </Model>
     </div>
   );
 }
