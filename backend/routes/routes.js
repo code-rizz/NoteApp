@@ -6,20 +6,23 @@ const {
   categoryController,
 } = require("../controllers/controllers");
 
+
+
 const router = express.Router();
+router.use(userVerification);
 
-router.post("/signup", Signup);
-router.post("/login", Login);
-router.post("/", userVerification);
+// router.post("/signup", Signup);
+// router.post("/login", Login);
+// router.post("/", userVerification);
 
-router.get("/:username/:category/todos", todoController.getTodos);
-router.post("/:username/:category/todos", todoController.addTodo);
-router.delete("/:username/:category/todos/:id", todoController.deleteTodo);
-router.patch("/:username/:category/todos/:id", todoController.editTodo);
+router.get("/api/:category/todos",todoController.getTodos);
+router.post("/api/:category/todos", todoController.addTodo);
+router.delete("/api/:category/todos/:id", todoController.deleteTodo);
+router.patch("/api/:category/todos/:id", todoController.editTodo);
 
-router.get("/:username/category", categoryController.getCategory);
-router.post("/:username/category/add", categoryController.addCategory);
-router.delete("/:username/category/:id", categoryController.deleteCategory);
-router.patch("/:username/category/:id", categoryController.editCategory);
+router.get("/api/category", categoryController.getCategory);
+router.post("/api/category/add", categoryController.addCategory);
+router.delete("/api/category/:id", categoryController.deleteCategory);
+router.patch("/api/category/:id", categoryController.editCategory);
 
 module.exports = router;

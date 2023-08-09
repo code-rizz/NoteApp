@@ -15,26 +15,10 @@ const HomePage = () => {
   const [cookies, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
 
-  useEffect(() => {
-    const verifyCookie = async () => {
-      if (!cookies.token) {
-        goto("/login");
-      }
-      const { data } = await axios.post(
-        "http://localhost:3001",
-        {},
-        { withCredentials: true }
-      );
-      const { status, user } = data;
-      setUsername(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), goto("/login"));
-    };
-    verifyCookie();
-  }, [cookies, goto, removeCookie]);
+ useEffect(()=>{
+  
+ },[])
+
   const Logout = () => {
     removeCookie("token");
     goto("/login");
@@ -57,12 +41,7 @@ const HomePage = () => {
     return axios.patch(`/${username}/Category/${id}`, { todo: updatedTodo });
   };
 
-  useEffect(() => {
-    const categories = getCategory();
-    categories.then((data) => {
-      setCatagory(data.data);
-    });
-  }, [category]);
+  
 
   return (
     <div className="w-screen h-screen flex">
@@ -77,7 +56,8 @@ const HomePage = () => {
         onAdd={() => setOpenAddCategory(true)}
       >
         <>
-          {category.map((cat) => (
+        {console.log(category)}
+          {category&&category.map((cat) => (
             <ListItem
               value={cat.name}
               key={cat.name}
