@@ -93,7 +93,7 @@ const categoryModel = {
     );
     return categories;
   },
-  addcategory: (username, todo) => {
+  addcategory: async (username, todo) => {
     const newItem = new Category({ name: todo, username: username });
     newItem.save();
   },

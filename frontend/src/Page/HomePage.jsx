@@ -26,6 +26,7 @@ const HomePage = () => {
 
   const Logout = () => {
     removeCookie("token");
+    toast.success(`You have logged out `);
     goto("/login");
   };
 
