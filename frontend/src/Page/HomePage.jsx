@@ -39,16 +39,16 @@ const HomePage = () => {
     removeCookie("token");
     goto("/login");
   };
+  async function getCategory() {
+    return await axios.get(`http://localhost:3001/krishna/category`);
+  }
 
-  const getCategory = () => {
-    console.log("here");
-    return axios.get(`/${username}/Category`);
-  };
-
-  const addCategory = (todo) => {
-    return axios.post(`/${username}/Category/add`, { todo });
-  };
-
+  async function addCategoryy(todo) {
+    console.log(todo);
+    return await axios.post("http://localhost:3001/krishna/category/add", {
+      todo: todo,
+    });
+  }
   const deleteCategory = (id) => {
     return axios.delete(`/${username}/Category/${id}`);
   };
@@ -56,6 +56,13 @@ const HomePage = () => {
   const editCategory = (id, updatedTodo) => {
     return axios.patch(`/${username}/Category/${id}`, { todo: updatedTodo });
   };
+
+  useEffect(() => {
+    const categories = getCategory();
+    categories.then((data) => {
+      setCatagory(data.data);
+    });
+  }, [category]);
 
   return (
     <div className="w-screen h-screen flex">
@@ -70,11 +77,11 @@ const HomePage = () => {
         onAdd={() => setOpenAddCategory(true)}
       >
         <>
-          {category.map((c, n) => (
+          {category.map((cat) => (
             <ListItem
-              value={c}
-              key={n}
-              onClick={() => goto("/todolist/" + c)}
+              value={cat.name}
+              key={cat.name}
+              onClick={() => goto("/todolist/" + cat.name)}
             />
           ))}
         </>
@@ -93,7 +100,7 @@ const HomePage = () => {
           <button
             className=" text-green-500"
             onClick={() => {
-              setCatagory([...category, addCategory]);
+              addCategoryy(addCategory);
               setOpenAddCategory(false);
               setAddCategory("");
             }}
@@ -103,6 +110,7 @@ const HomePage = () => {
           <button
             className=" text-red-500"
             onClick={() => {
+              addCategoryy(addCategory);
               setAddCategory("");
               setOpenAddCategory(false);
             }}

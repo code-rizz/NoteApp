@@ -80,7 +80,6 @@ const categoryModel = {
       { username: username },
       { __v: 0, list: 0 }
     );
-    console.log(categories);
     return categories;
   },
   addcategory: (username, todo) => {
