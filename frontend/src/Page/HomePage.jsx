@@ -63,7 +63,7 @@ const HomePage = () => {
             <ListItem
               value={cat.name}
               key={cat._id}
-              onClick={() => goto("/todolist/" + cat.name)}
+              onClick={() => goto("/todolist/" + cat.name+'/'+cat._id)}
             />
           ))}
         </>

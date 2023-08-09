@@ -3,25 +3,25 @@ const { todoModel, categoryModel } = require("../models/models");
 const todoController = {
   getTodos: async (req, res) => {
 
-    const username = res.locals.user;
+    const username = res.locals.user.username;
     const category = req.params.category;
     const todos = await todoModel.getTodos(category, username);
     res.json(todos);
   },
 
-  addTodo: (req, res) => {
-    const username = res.locals.user;
+  addTodo: async (req, res) => {
+    const username = res.locals.user.username;
     const category = req.params.category;
     const { todo } = req.body;
     if (!todo) {
       return res.status(400).json({ error: "Todo is required" });
     }
     todoModel.addTodo(category, todo, username);
-    res.status(201).json({ message: "Todo added successfully" });
+    res.status(201).json(await todoModel.getTodos(category, username));
   },
 
   deleteTodo: (req, res) => {
-    const username = res.locals.user;
+    const username = res.locals.user.username;
     const category = req.params.category;
     const id = req.params.id;
     todoModel.deleteTodo(category, id, username);
@@ -29,7 +29,7 @@ const todoController = {
   },
 
   editTodo: (req, res) => {
-    const username = res.locals.user;
+    const username = res.locals.user.username;
     const category = req.params.category;
     const id = req.params.id;
     const { todo } = req.body;
@@ -40,13 +40,13 @@ const todoController = {
 
 const categoryController = {
   getCategory: async (req, res) => {
-    const username = res.locals.user;
+    const username = res.locals.user.username;
     const todos = await categoryModel.getcategory(username);
     res.json(todos);
   },
 
   addCategory: async (req, res) => {
-    const username = res.locals.user;
+    const username = res.locals.user.username;
     const { todo } = req.body;
     if (!todo) {
       return res.status(400).json({ error: "Todo is required" });

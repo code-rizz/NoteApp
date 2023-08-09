@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<HomePage/>} />
-      <Route path='/todolist/:list' element={<ToDoList/>} />
+      <Route path='/todolist/:list/:id' element={<ToDoList/>} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
     </Routes>

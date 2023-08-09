@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Continer from "../Components/Continer";
 import CheckList from "../Components/CheckList";
@@ -8,12 +8,19 @@ function ToDoList() {
   const [toDoList, setToDoList] = useState([]);
   const { list } = useParams();
 
+  useEffect(()=>{
+    getTodos()
+  },[])
+
   const getTodos = () => {
-    return axios.get("/todos");
+    axios.get(`/api/${list}/todos`).then((res)=>{
+      console.log(res.data)
+      setToDoList(res.data);
+    })
   };
 
   const addTodo = (todo) => {
-    return axios.post("/todo", { todo });
+        axios.post(`/api/${list}/todos`, { todo:[""] }).then((res)=>{console.log(res.data);setToDoList(res.data);})
   };
 
   const deleteTodo = (id) => {
@@ -29,7 +36,7 @@ function ToDoList() {
       <Continer
         name={list}
         className="m-auto select-none"
-        onAdd={() => setToDoList([...toDoList, ""])}
+        onAdd={() => addTodo(" ")}
         onEdit={() => console.log("Added")}
         onDelete={() => console.log("Added")}
       >
