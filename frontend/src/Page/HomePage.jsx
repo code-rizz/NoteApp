@@ -16,22 +16,28 @@ const HomePage = () => {
   const [username, setUsername] = useState("");
 
  useEffect(()=>{
-  
+  axios.get(`/api/category`).then(res=>{
+    if(res.data.status === false)
+      goto('/login')
+      else
+      setCatagory(res.data)
+  })
  },[])
 
   const Logout = () => {
     removeCookie("token");
     goto("/login");
   };
-  async function getCategory() {
-    return await axios.get(`http://localhost:3001/krishna/category`);
-  }
+
 
   async function addCategoryy(todo) {
     console.log(todo);
-    return await axios.post("http://localhost:3001/krishna/category/add", {
+    axios.post("/api/category/add", {
       todo: todo,
-    });
+    }).then(res=>{
+      setCatagory(res.data)
+
+    })
   }
   const deleteCategory = (id) => {
     return axios.delete(`/${username}/Category/${id}`);
@@ -45,22 +51,18 @@ const HomePage = () => {
 
   return (
     <div className="w-screen h-screen flex">
-      <h4>
-        {" "}
-        Welcome <span>{username}</span>
-      </h4>
-      <button onClick={Logout}>LOGOUT</button>
       <Continer
         name="Note App"
         className="m-auto select-none"
         onAdd={() => setOpenAddCategory(true)}
+        onLogout={Logout}
       >
         <>
         {console.log(category)}
-          {category&&category.map((cat) => (
+          {category.map((cat) => (
             <ListItem
               value={cat.name}
-              key={cat.name}
+              key={cat._id}
               onClick={() => goto("/todolist/" + cat.name)}
             />
           ))}
@@ -90,7 +92,6 @@ const HomePage = () => {
           <button
             className=" text-red-500"
             onClick={() => {
-              addCategoryy(addCategory);
               setAddCategory("");
               setOpenAddCategory(false);
             }}

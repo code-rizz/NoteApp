@@ -45,14 +45,14 @@ const categoryController = {
     res.json(todos);
   },
 
-  addCategory: (req, res) => {
+  addCategory: async (req, res) => {
     const username = res.locals.user;
     const { todo } = req.body;
     if (!todo) {
       return res.status(400).json({ error: "Todo is required" });
     }
     categoryModel.addcategory(username, todo);
-    res.status(201).json({ message: "Todo added successfully" });
+    res.status(201).json(await categoryModel.getcategory(username));
   },
 
   deleteCategory: (req, res) => {

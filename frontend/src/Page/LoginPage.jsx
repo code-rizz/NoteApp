@@ -31,7 +31,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/login",
+        "/api/login",
         {
           ...inputValue,
         },
