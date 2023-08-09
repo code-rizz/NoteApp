@@ -17,9 +17,7 @@ function ToDoList() {
     getTodos()
   },[])
 
-  useEffect(()=>{
-    editTodo();
-  },[toDoList]);
+
 
   const getTodos = () => {
     axios.get(`/api/${list}/todos`).then((res)=>{
@@ -61,6 +59,7 @@ function ToDoList() {
               {name:e.target.value, _id:item._id},
               ...toDoList.slice(index + 1),
             ]);
+            editTodo();
           }}
           onChecked={(c) => {
             // let temp = [...toDoList];
