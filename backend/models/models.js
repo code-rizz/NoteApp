@@ -23,12 +23,17 @@ const Category = new mongoose.model("Category", categorySchema);
 
 const todoModel = {
   getTodos: async (category, username) => {
+    try{
     const todos = await Category.findOne(
       { name: category, username: username },
       { __v: 0 }
     );
     const list = todos.list;
     return list;
+    }
+    catch(err){
+    return {status: false};
+    }
   },
   addTodo: async (category, todo, username) => {
     const founditem = await Category.findOne({
@@ -49,25 +54,31 @@ const todoModel = {
         username: username,
       });
       const list = founditem.list;
-      const result = list.filter((li) => li._id != id);
-      await Category.updateOne({ name: category }, { $set: { list: result } });
+      const result = list.filter((li) => li._id.toString() != id);
+      await Category.findOneAndUpdate(
+        { name: category, username: username },
+        { $set: { list: result } }
+      );
     } catch (error) {
       console.log(error);
     }
   },
-  editTodo: async (category, id, newTodo, username) => {
+  editTodo: async (category, newTodo, username) => {
     try {
-      const founditem = await Category.findOne({
-        name: category,
-        username: username,
-      });
-      const list = founditem.list;
-      list.map((li) => {
-        if (li._id == id) {
-          li.name = newTodo;
-        }
-      });
-      await Category.updateOne({ name: category }, { $set: { list: list } });
+      // const founditem = await Category.findOne({
+      //   name: category,
+      //   username: username,
+      // });
+      // const list = founditem.list;
+      // list.map((li) => {
+      //   if (li._id == id) {
+      //     li.name = newTodo;
+      //   }
+      // });
+      await Category.findOneAndUpdate(
+        { name: category, username: username },
+        { $set: { list: newTodo } }
+      );
     } catch (error) {
       console.log(error);
     }

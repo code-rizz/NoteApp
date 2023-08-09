@@ -18,7 +18,7 @@ router.use(userVerification);
 router.get("/api/:category/todos",todoController.getTodos);
 router.post("/api/:category/todos", todoController.addTodo);
 router.delete("/api/:category/todos/:id", todoController.deleteTodo);
-router.patch("/api/:category/todos/:id", todoController.editTodo);
+router.patch("/api/:category/todos/", todoController.editTodo);
 
 router.get("/api/category", categoryController.getCategory);
 router.post("/api/category/add", categoryController.addCategory);

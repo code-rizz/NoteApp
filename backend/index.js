@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use('/', authRouter)
 app.use("/", Routes);
 try {
-  mongoose.connect("mongodb+srv://sirajudeen:EDl3u4ZXosHz9UTu@cluster.czracq4.mongodb.net/?retryWrites=true&w=majority");
+  mongoose.connect("mongodb://127.0.0.1:27017/noteapp");
 } catch (error) {
   console.log(error);
 }

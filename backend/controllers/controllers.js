@@ -16,25 +16,25 @@ const todoController = {
     if (!todo) {
       return res.status(400).json({ error: "Todo is required" });
     }
-    todoModel.addTodo(category, todo, username);
+    await todoModel.addTodo(category, todo, username);
     res.status(201).json(await todoModel.getTodos(category, username));
   },
 
-  deleteTodo: (req, res) => {
+  deleteTodo: async (req, res) => {
     const username = res.locals.user.username;
     const category = req.params.category;
     const id = req.params.id;
-    todoModel.deleteTodo(category, id, username);
-    res.json({ message: "Todo deleted successfully" });
+    await todoModel.deleteTodo(category, id, username);
+    res.json(await todoModel.getTodos(category, username));
   },
 
-  editTodo: (req, res) => {
+  editTodo: async (req, res) => {
     const username = res.locals.user.username;
     const category = req.params.category;
     const id = req.params.id;
     const { todo } = req.body;
-    todoModel.editTodo(category, id, todo, username);
-    res.json({ message: "Todo updated Successfully" });
+    await todoModel.editTodo(category, todo, username);
+    res.json(await todoModel.getTodos(category, username));
   },
 };
 
@@ -51,20 +51,20 @@ const categoryController = {
     if (!todo) {
       return res.status(400).json({ error: "Todo is required" });
     }
-    categoryModel.addcategory(username, todo);
+    await categoryModel.addcategory(username, todo);
     res.status(201).json(await categoryModel.getcategory(username));
   },
 
-  deleteCategory: (req, res) => {
+  deleteCategory: async (req, res) => {
     const id = req.params.id;
-    categoryModel.deletecategory(id);
+    await categoryModel.deletecategory(id);
     res.json({ message: "Todo deleted successfully" });
   },
 
-  editCategory: (req, res) => {
+  editCategory: async (req, res) => {
     const id = req.params.id;
     const { todo } = req.body;
-    categoryModel.editcategory(id, todo);
+    await categoryModel.editcategory(id, todo);
     res.json({ message: "Todo updated Successfully" });
   },
 };

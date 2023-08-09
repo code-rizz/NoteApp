@@ -5,6 +5,9 @@ const Continer = (props) => {
   return (
     <div className={props.className+' w-full h-full sm:h-5/6 sm:w-1/2 rounded-xl min-h-fit min-w-fit shadow-2xl flex-row relative '}>
         <div className='h-1/6 m-3 relative flex'>
+        <Button  onClick={props.onBack} className=' absolute top-2 left-2'>
+        <svg className='w-5 h-5' viewBox="0 0 24 24" ><path d="M12,9.059V6.5c0-0.256-0.098-0.512-0.293-0.708C11.512,5.597,11.256,5.5,11,5.5s-0.512,0.097-0.707,0.292L4,12l6.293,6.207  C10.488,18.402,10.744,18.5,11,18.5s0.512-0.098,0.707-0.293S12,17.755,12,17.5v-2.489c2.75,0.068,5.755,0.566,8,3.989v-1  C20,13.367,16.5,9.557,12,9.059z"/></svg>
+              </Button>
             <div className='m-auto font-extrabold font-["Poppins"] text-3xl'>{props.name}</div>
               <Button onClick={props.onLogout} className=' absolute top-2 right-2'>
               <svg className='w-5 h-5' viewBox="0 0 128 128"><g><polygon points="91,119 9,119 9,9 91,9 91,1 1,1 1,127 91,127  "/><rect height="8" width="8" x="40" y="60"/><polygon points="90.8,96.8 123.7,64 90.8,31.2 85.2,36.8 108.3,60 58,60 58,68 108.3,68 85.2,91.2  "/></g></svg>
