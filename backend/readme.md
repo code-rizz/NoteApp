@@ -2,9 +2,9 @@
 
 ## Installation commands
 
-`mkdir backend
- npm init -y
- npm i nodemon express`
+`mkdir backend`
+ `npm init -y`
+ `npm i nodemon express`
  
 
  
