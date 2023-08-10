@@ -8,7 +8,7 @@ npm init -y
 npm i nodemon express
 ```
 
-```bash
+```json
 "start":"nodemon index.js" -> inside scripts in package.json
 ```
  
