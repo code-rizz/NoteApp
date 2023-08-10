@@ -1,3 +1,4 @@
+
 # Note app - backend
 
 ## Installation commands
@@ -321,16 +322,6 @@ const todoModel = {
   },
   editTodo: async (category, newTodo, username) => {
     try {
-      // const founditem = await Category.findOne({
-      //   name: category,
-      //   username: username,
-      // });
-      // const list = founditem.list;
-      // list.map((li) => {
-      //   if (li._id == id) {
-      //     li.name = newTodo;
-      //   }
-      // });
       await Category.findOneAndUpdate(
         { name: category, username: username },
         { $set: { list: newTodo } }
