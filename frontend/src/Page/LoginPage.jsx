@@ -35,7 +35,6 @@ const LoginPage = () => {
         {
           ...inputValue,
         },
-        { withCredentials: true }
       );
       console.log(data);
       const { success, message } = data;
