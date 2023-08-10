@@ -407,4 +407,9 @@ userSchema.pre("save", async function () {
 module.exports = mongoose.model("User", userSchema);
 ```
 
-
+### .env
+```bash
+MONGO_URL=mongodb+srv://<username>:<password>@cluster.czracq4.mongodb.net/?retryWrites=true&w=majority
+PORT=4000
+TOKEN_KEY=your secret token
+```
