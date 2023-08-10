@@ -15,7 +15,8 @@ npm i nodemon express
     "start": "nodemon index.js"
   },
 ```
-
+### To Start the server
+`npm start`
  
 
  
