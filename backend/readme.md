@@ -28,6 +28,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const Routes = require("./routes/routes");
 const authRouter = require("./routes/authRoutes");
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,7 +41,7 @@ try {
   console.log(error);
 }
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log("Server started on port 3001");
 });
 ```
