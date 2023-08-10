@@ -16,7 +16,9 @@ npm i nodemon express
   },
 ```
 ### To Start the server
-`npm start`
+```bash
+npm start
+```
  
 
  
