@@ -5,9 +5,11 @@ import HomePage from './Page/HomePage';
 import ToDoList from './Page/ToDoList';
 import LoginPage from './Page/LoginPage';
 import RegisterPage from './Page/RegisterPage';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   return (
+    <AnimatePresence mode='wait' >
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<HomePage/>} />
@@ -16,6 +18,7 @@ function App() {
       <Route path='/register' element={<RegisterPage />} />
     </Routes>
     </BrowserRouter>
+    </AnimatePresence>
   );
 }
 

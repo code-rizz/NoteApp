@@ -21,7 +21,7 @@ function ToDoList() {
 
   const getTodos = () => {
     axios.get(`/api/${list}/todos`).then((res)=>{
-      console.log(res.data)
+      // console.log(res.data)
       if(res.data.status === false)
         goto('/')
       setToDoList(res.data);
@@ -53,6 +53,7 @@ function ToDoList() {
         {toDoList.map((item, index) => (
           <CheckList
           value={item.name}
+          key={item._id}
           onType={(e) => {
             setToDoList([
               ...toDoList.slice(0, index),
@@ -68,7 +69,6 @@ function ToDoList() {
             // console.log(c.target.value);
             deleteTodo(item._id);
           }}
-          key={index}
         />
         ))}
       </Continer>
